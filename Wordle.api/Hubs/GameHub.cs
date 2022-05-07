@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using SignalRSwaggerGen.Attributes;
 
 namespace Wordle.Api.Hubs
 {
+    [SignalRHub]
     public class GameHub : Hub
     {
         public async Task NewCharacter(string username, string character, string roomName)

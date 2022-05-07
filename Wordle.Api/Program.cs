@@ -100,6 +100,7 @@ namespace Wordle.Api
                     Array.Empty<string>()
                 }
                 });
+                c.AddSignalRSwaggerGen();
             });
 
             builder.Services.AddScoped<ILeaderBoardService, LeaderBoardService>();
