@@ -18,10 +18,9 @@ namespace Wordle.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet()]
+        [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            _logger.LogInformation("Get Weather");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
@@ -30,23 +29,5 @@ namespace Wordle.Api.Controllers
             })
             .ToArray();
         }
-
-        [HttpPost()]
-        public IEnumerable<WeatherForecast> Post(PostData data)
-        {
-            return Enumerable.Range(1, data.Items).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-
-        public class PostData
-        {
-            public int Items { get; set; }
-        }
-
     }
 }

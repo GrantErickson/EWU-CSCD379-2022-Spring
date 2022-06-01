@@ -1,8 +1,10 @@
-﻿namespace Wordle.Api.Services
+﻿using Wordle.Api.Dtos;
+
+namespace Wordle.Api.Services
 {
     public interface ILeaderBoardService
     {
-        IEnumerable<Score> GetHighScores();
-        Score UpdateScore(string name, int numberOfAttempts);
+        IEnumerable<Score> GetScores();
+        void AddScore(GameScore score);
     }
 }

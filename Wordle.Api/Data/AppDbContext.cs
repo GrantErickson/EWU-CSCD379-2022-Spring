@@ -1,15 +1,29 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Wordle.Api.Data
 {
-    public class AppDbContext : IdentityDbContext<AppUser>
+    public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
 
-        public AppDbContext() : base() { }
+        public DbSet<ScoreStat> ScoreStats => Set<ScoreStat>();
+        public DbSet<Player> Players => Set<Player>();
+        public DbSet<Word> Words => Set<Word>();
+        public DbSet<Game> Games => Set<Game>();
+        public DbSet<DateWord> DateWords => Set<DateWord>();
+        public DbSet<Setting> Settings => Set<Setting>();
+        public DbSet<Guess> Guesses => Set<Guess>();
 
-        public DbSet<ScoreStat> ScoreStats { get; set; } = null!;
-    }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //new GameConfiguration().Configure(modelBuilder.Entity<Game>());
+            //new WordConfiguration().Configure(modelBuilder.Entity<Word>());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
+    }        
 }
